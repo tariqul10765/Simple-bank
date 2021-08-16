@@ -3,7 +3,7 @@ const password = document.getElementById('password');
 
 
 document.getElementById('submit-btn').addEventListener('click', function(){
-    if(email.value == 'tariqul10765@gmail.com' && password.value == 'sample'){
+    if(email.value == 'a@gmail.com' && password.value == 'root'){
         // go to bank transaction page
         window.location.href = 'bank.html';
 
