@@ -1,28 +1,35 @@
-const depositInput = document.getElementById('deposit-input');
-const withdrawInput = document.getElementById('withdraw-input');
+function getInputAmount(inputId){
+    const input = document.getElementById(inputId);
+    const amount = parseFloat(input.value);
 
-const deposit = document.getElementById('deposit');
-const withdraw = document.getElementById('withdraw');
-const totalBalance = document.getElementById('total-balance');
-
+    input.value = '';
+    return amount;
+}
+function updateBalance(transaction_method, transactionAmount){
+    const transactionMethod = document.getElementById(transaction_method);
+    const totalBalance = document.getElementById('total-balance');
+    transactionMethod.innerText = parseFloat(transactionMethod.innerText) + transactionAmount;
+    if(transaction == 'deposit'){
+        totalBalance.innerText = parseFloat(totalBalance.innerText) + transactionAmount;
+    }
+    else {
+        totalBalance.innerText = parseFloat(totalBalance.innerText) - transactionAmount;
+    }
+}
 document.getElementById('deposit-btn').addEventListener('click', function(){
-    const depositAmount = parseFloat(depositInput.value);
-    if(depositInput.value != ''){
-        deposit.innerText = parseFloat(deposit.innerText) + depositAmount;
-        totalBalance.innerText = parseFloat(totalBalance.innerText) + depositAmount;
+    const depositAmount = getInputAmount('deposit-input');
 
-        depositInput.value = '';
+    if(!isNaN(depositAmount) && depositAmount > 0){
+        updateBalance('deposit', depositAmount);
     }
 
 });
 document.getElementById('withdraw-btn').addEventListener('click', function(){
-    const withdrawAmount = parseFloat(withdrawInput.value);
+    const withdrawAmount = getInputAmount('withdraw-input');
+    console.log(withdrawAmount);
 
-    if(withdrawInput.value != ''){
-        withdraw.innerText = parseFloat(withdraw.innerText) + withdrawAmount;
-        totalBalance.innerText = parseFloat(totalBalance.innerText) - withdrawAmount;
-
-        withdrawInput.value = '';
+    if(!isNaN(withdrawAmount) && withdrawAmount > 0){
+        updateBalance('withdraw', withdrawAmount);
     }
     
 });
